@@ -1,9 +1,12 @@
 from pydub import AudioSegment
 from pydub.playback import play
 
-sound = AudioSegment.from_file('in.wav', format="wav")
+# take audio mp3 a first argument from command line
+
+sound = AudioSegment.from_file(sys.argv[1], format="wav")
 
 # shift the pitch up by half an octave (speed will increase proportionally)
+#change below parameter to see change in voice pitch
 octaves = 0.5
 
 new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
