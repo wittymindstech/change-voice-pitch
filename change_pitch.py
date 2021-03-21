@@ -1,13 +1,14 @@
+import sys
 from pydub import AudioSegment
 from pydub.playback import play
 
 # take audio mp3 a first argument from command line
-
+print ("Usage: python change_pitch.py input.wav output.wav frequency")
 sound = AudioSegment.from_file(sys.argv[1], format="wav")
 
 # shift the pitch up by half an octave (speed will increase proportionally)
 #change below parameter to see change in voice pitch
-octaves = 0.5
+octaves = float(sys.argv[3])
 
 new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
 
@@ -24,4 +25,4 @@ hipitch_sound = hipitch_sound.set_frame_rate(44100)
 play(hipitch_sound)
 
 #export / save pitch changed sound
-hipitch_sound.export("out.wav", format="wav")
+hipitch_sound.export(sys.argv[2], format="wav")
